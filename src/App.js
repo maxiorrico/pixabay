@@ -10,6 +10,11 @@ class App extends Component {
     imagenes : []
   };
 
+  scroll = () => {
+    const element = document.querySelector('.jumbotron');
+    element.scrollIntoView('smooth', 'start');
+  }
+
   consultaApi = () => {
     const url = `https://pixabay.com/api/?key=14763259-e18920a8083d9c1a7578a160c&q=${ this.state.termino }&image_type=photo&pretty=true&page=${ this.state.pagina }`;
     fetch( url )
@@ -32,6 +37,7 @@ class App extends Component {
       pagina--;
       this.setState({pagina : pagina}, () => {
         this.consultaApi();
+        this.scroll();
       });
     }
     console.log( pagina );
@@ -42,6 +48,8 @@ class App extends Component {
     pagina++;
     this.setState({pagina : pagina}, () => {
       this.consultaApi();
+      this.scroll();
+
     });
     console.log( pagina );
   }
